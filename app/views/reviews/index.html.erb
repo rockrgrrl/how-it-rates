@@ -4,6 +4,10 @@
 
 <% @reviews.each do |review| %>
   <p>
+    <strong>Category:</strong>
+    <%= review.subcategory.name %>
+  </p>
+  <p>
     <strong>Location:</strong>
     <%= review.location %>
   </p>
@@ -16,9 +20,18 @@
     <%= review.description %>
   </p>
    <p>
-    <strong>Rating:</strong>
-    <%= review.rating %>
+    <div class="star-rating" data-score= <%= review.rating %> ></div>
   </p><br>
 <% end %>
 
 <%= button_to 'Add Review', new_user_review_path, method: :get %>
+
+<script>
+  $(".star-rating").raty({
+    path: "/assets/",
+    readOnly: true,
+    score: function() {
+      return $(this).attr("data-score");
+    }
+  });
+</script>

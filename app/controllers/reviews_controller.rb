@@ -1,7 +1,7 @@
 class ReviewsController < ApplicationController
   def index
     @user = User.find(params[:user_id])
-    @reviews = Review.all
+    @reviews = Review.all.order(:category_id, :subcategory_id, :rating)
   end
 
   def new
@@ -22,6 +22,6 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:location, :variety, :description, :rating)
+    params.require(:review).permit(:category_id, :subcategory_id, :location, :variety, :description, :rating)
   end
 end
