@@ -1,60 +1,62 @@
-<%= form_for([@user, @review], html: {class: "form-horizontal"}) do |f| %>
-    <% if @review.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@review.errors.count, "error") %> prohibited
-        this article from being saved:
-      </h2>
-      <ul>
-        <% @review.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+<div class="container add-review">
+  <%= form_for([@user, @review], html: {class: "form-horizontal"}) do |f| %>
+      <% if @review.errors.any? %>
+      <div id="error_explanation">
+        <h2>
+          <%= pluralize(@review.errors.count, "error") %> prohibited
+          this article from being saved:
+        </h2>
+        <ul>
+          <% @review.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label :category, class: "col-sm-2 control-label" %>
+      <div id="category" class="col-sm-4">
+        <%= f.collection_select :category_id, Category.order(:name), :id, :name, {prompt: "Select One"}, class: 'form-control' %>
+      </div>  
+    </div>
+     <div class="form-group">
+      <%= f.label :subcategory, class: "col-sm-2 control-label" %>
+      <div id="subcat" class="col-sm-4">
+        <%= f.grouped_collection_select :subcategory_id, Category.order(:name), :subcategories, :name, :id, :name, {prompt: "Select One"},  class: 'form-control' %>
+      </div>  
+    </div>
+    <div class="form-group">
+      <%= f.label :location, class: "col-sm-2 control-label" %>
+      <div class="col-sm-4">
+        <%= f.text_field :location, class: 'form-control' %>
+      </div>  
+    </div>
+    <div class="form-group">
+      <%= f.label :variety, class: "col-sm-2 control-label" %>
+      <div class="col-sm-4">
+        <%= f.text_field :variety, class: 'form-control' %>
+      </div>  
+    </div>
+    <div class="form-group">
+      <%= f.label :description, class: "col-sm-2 control-label" %>
+      <div class="col-sm-4">
+        <%= f.text_area :description, class: 'form-control' %>
+      </div>  
+    </div>
+    <div class="form-group">
+      <%= f.label :rating, class: "col-sm-2 control-label" %>
+      <div class="col-sm-4">
+        <div id="star-rating"></div>
+      </div>  
+    </div>
+    <div class="actions form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <%= f.submit "Save", class: 'btn btn-success' %>
+      </div>
     </div>
   <% end %>
-
-  <div class="form-group">
-    <%= f.label :category, class: "col-sm-2 control-label" %>
-    <div id="category" class="col-sm-4">
-      <%= f.collection_select :category_id, Category.order(:name), :id, :name, {prompt: "Select One"}, class: 'form-control' %>
-    </div>  
-  </div>
-   <div class="form-group">
-    <%= f.label :subcategory, class: "col-sm-2 control-label" %>
-    <div id="subcat" class="col-sm-4">
-      <%= f.grouped_collection_select :subcategory_id, Category.order(:name), :subcategories, :name, :id, :name, {prompt: "Select One"},  class: 'form-control' %>
-    </div>  
-  </div>
-  <div class="form-group">
-    <%= f.label :location, class: "col-sm-2 control-label" %>
-    <div class="col-sm-4">
-      <%= f.text_field :location, class: 'form-control' %>
-    </div>  
-  </div>
-  <div class="form-group">
-    <%= f.label :variety, class: "col-sm-2 control-label" %>
-    <div class="col-sm-4">
-      <%= f.text_field :variety, class: 'form-control' %>
-    </div>  
-  </div>
-  <div class="form-group">
-    <%= f.label :description, class: "col-sm-2 control-label" %>
-    <div class="col-sm-4">
-      <%= f.text_area :description, class: 'form-control' %>
-    </div>  
-  </div>
-  <div class="form-group">
-    <%= f.label :rating, class: "col-sm-2 control-label" %>
-    <div class="col-sm-4">
-      <div id="star-rating"></div>
-    </div>  
-  </div>
-  <div class="actions form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <%= f.submit "Save", class: 'btn btn-success' %>
-    </div>
-  </div>
-<% end %>
+</div>
 
 <script>
   $('#star-rating').raty({

@@ -1,30 +1,34 @@
-<h2><%= current_user.first_name %>'s List</h2>
 
-<h3>Your List has <%= pluralize(current_user.reviews.count, "review") %>.</h3>
+  <h2><%= current_user.first_name %>'s List</h2>
 
-<% @reviews.each do |review| %>
-  <p>
-    <strong>Category:</strong>
-    <%= review.subcategory.name %>
-  </p>
-  <p>
-    <strong>Location:</strong>
-    <%= review.location %>
-  </p>
-   <p>
-    <strong>Type:</strong>
-    <%= review.variety %>
-  </p>
-   <p>
-    <strong>Description:</strong>
-    <%= review.description %>
-  </p>
-   <p>
-    <div class="star-rating" data-score= <%= review.rating %> ></div>
-  </p><br>
-<% end %>
+  <h3>Your List has <%= pluralize(current_user.reviews.count, "review") %>.</h3>
 
-<%= button_to 'Add Review', new_user_review_path, method: :get %>
+
+<div class="jumbotron">
+  <% @reviews.each do |review| %>
+    <p>
+      <strong>Category:</strong>
+      <%= review.subcategory.name %>
+    </p>
+    <p>
+      <strong>Location:</strong>
+      <%= review.location %>
+    </p>
+     <p>
+      <strong>Type:</strong>
+      <%= review.variety %>
+    </p>
+     <p>
+      <strong>Description:</strong>
+      <%= review.description %>
+    </p>
+     <p>
+      <div class="star-rating" data-score= <%= review.rating %> ></div>
+    </p><br>
+  <% end %>
+
+  <%= button_to 'Add Review', new_user_review_path, method: :get, class: "btn btn-success" %>
+</div>
 
 <script>
   $(".star-rating").raty({

@@ -1,0 +1,45 @@
+<!-- <div class="jumbotron"> -->
+  
+  <h3><%= @subcategory.name %></h3>    
+
+  <table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Location</th>
+      <th>Description</th>
+      <th>Rating</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @reviews.each do |review| %>
+      <tr>
+        <td><%= review.variety %></td>
+        <td><%= review.location %></td>
+        <td><%= review.description %></td>
+        <td class="star-rating" data-score= <%= review.rating %> ></td>
+      </tr>
+    <div></div>
+    <% end %>
+  </tbody>
+</table> 
+    
+
+    
+  
+
+  <%= button_to 'Add Review', new_user_review_path, method: :get, class: "btn btn-success" %>
+  <%= button_to 'Back to My Page', user_path(current_user), method: :get, class: "btn btn-success" %>
+<!-- </div> -->
+
+<script>
+  $(".star-rating").raty({
+    path: "/assets/",
+    readOnly: true,
+    score: function() {
+      return $(this).attr("data-score");
+    }
+  });
+</script>
+
+

@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   resources :users do
-    resources :reviews
+    resources :reviews 
+    resources :subcategories, :only => [:index, :show]
   end
 
   # Example of regular route:

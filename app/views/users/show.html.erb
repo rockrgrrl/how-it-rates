@@ -1,1 +1,32 @@
-<h2>Hello <%= current_user.first_name %>. </h2>
+<div class="container">
+  <div class="jumbotron hello-user" > 
+    
+    
+      <h2>Hello <%= current_user.first_name %>. </h2>
+    
+  </div> 
+
+
+
+  <div class="container-marketing">
+    
+      <div class="row">
+       
+        <% @user.categories.uniq.each do |category| %>
+          <div class="col-lg-4">
+            <a href="#" class="cats-panel"><h3><%= category.name %></h3></a>
+            <div class="subcats-panel">
+              <% if @user.subcategories.any? %>
+                <% category.subcategories.each do |subcategory| %>
+                  <% if subcategory.reviews.any? %>
+                    <h4><%= link_to "#{subcategory.name}", user_subcategory_path(@user.id, subcategory.id) %></h4>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      
+  </div>
+</div>
